@@ -15,8 +15,6 @@ const Register = () => {
     try {
       const res = await axios.post("http://localhost:5000/api/auth/register", form);
       setMessage(res.data.message || "Registration successful ✅");
-
-      // Optional: redirect to login after 1 second
       setTimeout(() => {
         navigate("/login");
       }, 1000);
@@ -68,5 +66,4 @@ const Register = () => {
     </div>
   );
 };
-
 export default Register;

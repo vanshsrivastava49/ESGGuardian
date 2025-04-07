@@ -1,42 +1,40 @@
-const Agreement = require("../models/Agreement");
-const fs = require("fs");
+const ESGAgreement = require("../models/ESGAgreement");
+const { extractTextFromFile } = require("../utils/fileParser");
+const { fetchESGStandards } = require("../utils/esgAPI");
+const { evaluateESGCompliance } = require("../utils/mlModel");
 
 exports.uploadAgreement = async (req, res) => {
   try {
-    const agreement = new Agreement({
-      userId: req.user.id,
-      filePath: req.file.path,
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    // Extract text from uploaded file (PDF, DOCX, TXT)
+    const textContent = await extractTextFromFile(req.file.path);
+
+    // Fetch ESG standard data (from ESG API or static data)
+    const esgData = await fetchESGStandards();
+
+    // Use ML model to evaluate ESG compliance
+    const { score, issues } = await evaluateESGCompliance(textContent, esgData);
+
+    // Create and save ESG Agreement record
+    const newAgreement = new ESGAgreement({
+      companyName: req.body.companyName || "Unknown",
+      validated: issues.length === 0,
+      filePath: `/uploads/${req.file.filename}`,
+      fileHash: req.body.fileHash || null,
+      esgScore: score,
+      validationErrors: issues,
     });
-    await agreement.save();
-    res.status(201).json({ message: "Agreement uploaded successfully", agreement });
-  } catch (error) {
-    res.status(500).json({ message: "Upload failed", error });
-  }
-};
 
-exports.validateAgreement = async (req, res) => {
-  try {
-    const { id } = req.params;
+    await newAgreement.save();
 
-    // Simulated ESG validation logic
-    const remarks = "Validated with ESG compliance guidelines. [Simulated]";
-    const updated = await Agreement.findByIdAndUpdate(id, {
-      validated: true,
-      remarks,
-      updatedAt: new Date()
-    }, { new: true });
-
-    res.json(updated);
-  } catch (error) {
-    res.status(500).json({ message: "Validation failed", error });
-  }
-};
-
-exports.getAgreements = async (req, res) => {
-  try {
-    const agreements = await Agreement.find({ userId: req.user.id });
-    res.json(agreements);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching agreements" });
+    res.status(200).json({
+      message: "Upload successful!",
+      agreement: newAgreement,
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Upload failed", error: err.message });
   }
 };

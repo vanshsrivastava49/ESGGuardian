@@ -8,9 +8,7 @@ body{
     max-width: 620px;
     margin: 3rem auto;
     padding: 2.5rem;
-    background: linear-gradient(135deg, #f0f9ff, #e0fee7);
     border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease-in-out;
   }
   
@@ -33,6 +31,7 @@ body{
     border-radius: 12px;
     font-size: 1rem;
     transition: border 0.3s, box-shadow 0.3s;
+    font-family: "Outfit",sans-serif;
     outline: none;
   }
   
@@ -48,6 +47,7 @@ body{
     background: #2c7744;;
     color: white;
     border: none;
+    font-family: "Outfit",sans-serif;
     border-radius: 14px;
     font-size: 1rem;
     font-weight: 600;

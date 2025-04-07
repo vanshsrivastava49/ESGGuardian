@@ -21,9 +21,9 @@ const Validate = () => {
         agreementId,
       });
       setResult(res.data);
-      setMessage("✅ Validation successful");
+      setMessage("Validation successful!!");
     } catch (error) {
-      setMessage("❌ Validation failed");
+      setMessage("Validation failed!!");
       setResult(null);
     }
   };

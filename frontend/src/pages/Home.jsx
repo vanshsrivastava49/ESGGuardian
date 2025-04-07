@@ -8,7 +8,7 @@ const Home = () => {
       <div className="home-hero">
         <h1 className="home-title">Welcome to ESGGuardian</h1>
         <p className="home-subtitle">
-          Revolutionizing ESG Compliance with Blockchain Transparency.
+        Automating Trust. Enforcing Impact. ESG Compliance, Reinvented on the Blockchain.
         </p>
         <div className="home-buttons">
           <Link to="/register" className="home-btn">Get Started</Link>

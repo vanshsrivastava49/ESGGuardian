@@ -1,14 +1,14 @@
 body{
+  min-height: 100vh;
+  min-width:100vw;
     margin:0 auto;
     padding:0 auto;
     font-family: "Outfit", sans-serif;
     background: linear-gradient(135deg, #e9ffe2, #f3f8eb);
 }
 .validate-section {
-    background: linear-gradient(135deg, #e9ffe2, #f3f8eb);
     padding: 2.5rem;
     border-radius: 20px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
     max-width: 600px;
     margin: 3rem auto;
     transition: all 0.3s ease;
@@ -17,6 +17,7 @@ body{
   .validate-section h2 {
     font-size: 1.75rem;
     font-weight: 700;
+    margin-top:-20px;
     color: #2c7744;
     text-align: center;
     margin-bottom: 1.5rem;
@@ -43,8 +44,11 @@ body{
     color: white;
     padding: 0.85rem 1.5rem;
     width: 100%;
+    margin-left: 180px;
+    width:200px;
     border: none;
-    border-radius: 14px;
+    border-radius: 10px;
+    margin-top:20px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;

@@ -9,6 +9,8 @@ const Navbar = () => {
         <Link to="/upload" className="hover:underline">Upload</Link>
         <Link to="/validate" className="hover:underline">Validate</Link>
         <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+        <Link to="/register" className="hover:underline">Register</Link>
+        <Link to="/login" className="hover:underline">Login</Link>
         <Link to="/login" className="hover:underline">Logout</Link>
       </div>
     </nav>

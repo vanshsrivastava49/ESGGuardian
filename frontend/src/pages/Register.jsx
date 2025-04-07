@@ -36,7 +36,7 @@ const Register = () => {
           onChange={handleChange}
           className="border w-full p-2 rounded"
           required
-        />
+        /><br/>
         <input
           name="email"
           type="email"
@@ -45,7 +45,7 @@ const Register = () => {
           onChange={handleChange}
           className="border w-full p-2 rounded"
           required
-        />
+        /><br/>
         <input
           name="password"
           type="password"
@@ -54,7 +54,7 @@ const Register = () => {
           onChange={handleChange}
           className="border w-full p-2 rounded"
           required
-        />
+        /><br/>
         <button
           type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded"

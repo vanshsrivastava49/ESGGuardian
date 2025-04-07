@@ -12,6 +12,7 @@ const App = () => {
     <Router>
       <Navbar />
       <Routes>
+      <Route path="/" element={<Register />} />
         <Route path="/upload" element={<Upload />} />
         <Route path="/validate" element={<Validate />} />
         <Route path="/dashboard" element={<Dashboard />} />

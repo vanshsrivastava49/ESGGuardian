@@ -1,0 +1,193 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "fileHash",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "companyName",
+				"type": "string"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "uploader",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"name": "AgreementUploaded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "string",
+				"name": "fileHash",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "validated",
+				"type": "bool"
+			}
+		],
+		"name": "AgreementValidated",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_fileHash",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_companyName",
+				"type": "string"
+			}
+		],
+		"name": "uploadAgreement",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_fileHash",
+				"type": "string"
+			}
+		],
+		"name": "validateAgreement",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"name": "agreements",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "fileHash",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "companyName",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "validated",
+				"type": "bool"
+			},
+			{
+				"internalType": "address",
+				"name": "uploader",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "allHashes",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_fileHash",
+				"type": "string"
+			}
+		],
+		"name": "getAgreement",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "fileHash",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "companyName",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "validated",
+				"type": "bool"
+			},
+			{
+				"internalType": "address",
+				"name": "uploader",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "timestamp",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllHashes",
+		"outputs": [
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

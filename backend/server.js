@@ -7,19 +7,18 @@ const path = require("path");
 dotenv.config();
 const app = express();
 
-// CORS setup
-const corsOptions = {
-  origin: "http://localhost:5173", // frontend origin
+// ✅ Middleware setup
+app.use(cors({
+  origin: "http://localhost:5173", // your frontend origin
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true,
-};
-app.use(cors(corsOptions));
+}));
 app.use(express.json());
 
-// ✅ Serve uploaded files statically
+// ✅ Serve uploaded files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ Import routes with error safety check
+// ✅ Route Imports
 try {
   const authRoutes = require("./routes/authRoutes");
   app.use("/api/auth", authRoutes);
@@ -36,12 +35,11 @@ try {
 
 try {
   const esgAgreementRoutes = require("./routes/esgAgreementRoutes");
-  app.use("/api/agreements", esgAgreementRoutes);
+  app.use("/api/agreements", esgAgreementRoutes); // ✅ make sure esgAgreementRoutes is a router, not a function
 } catch (err) {
   console.error("❌ Error loading esgAgreementRoutes:", err.message);
 }
 
-// ✅ Connect to MongoDB and start server
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log("✅ MongoDB connected");
@@ -53,4 +51,3 @@ mongoose.connect(process.env.MONGO_URI)
   .catch((err) => {
     console.error("❌ MongoDB connection error:", err.message);
   });
-

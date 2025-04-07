@@ -51,7 +51,7 @@ const Dashboard = () => {
                 <td>
                   {a.filePath ? (
                     <a
-                      href={`http://localhost:5000/${a.filePath.replace(/\\/g, "/")}`}
+                      href={`http://localhost:5000/uploads/${a.filePath.split("/").pop()}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{ color: "#1d4ed8", textDecoration: "underline" }}

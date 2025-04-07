@@ -16,34 +16,40 @@ const Upload = () => {
   const [companyName, setCompanyName] = useState("");
   const [file, setFile] = useState(null);
   const [message, setMessage] = useState("");
-  const [esgStatus] = useState("Compliant"); // You can allow user to select later
+  const [esgStatus] = useState("Compliant");
 
   const handleUpload = async () => {
     if (!file || !companyName) return setMessage("Please provide company name and file");
 
     try {
-      // 1. Calculate file hash
+      // 1️⃣ Calculate file hash
       const fileHash = await calculateFileHash(file);
 
-      // 2. Upload to backend
+      // 2️⃣ Upload to blockchain first
+      setMessage("⛓️ Uploading to blockchain...");
+      const blockchainResult = await uploadAgreementToBlockchain(fileHash, companyName, esgStatus);
+
+      if (!blockchainResult.success) {
+        setMessage(`❌ Blockchain Error: ${blockchainResult.error}`);
+        return;
+      }
+
+      // 3️⃣ Upload file to backend (MongoDB)
+      setMessage("📤 Uploading file to server...");
       const formData = new FormData();
       formData.append("agreement", file);
       formData.append("companyName", companyName);
-      const response = await axios.post("http://localhost:5000/api/agreements/upload", formData);
-      console.log("Backend response: ",response.data);
-      setMessage(`✅ Uploaded! ID: ${response.data.agreementId}`);
+      formData.append("fileHash", fileHash); // now passing hash
 
-      // 3. Upload to blockchain
-      const blockchainResult = await uploadAgreementToBlockchain(fileHash, companyName, esgStatus);
-      if (blockchainResult.success) {
-        setMessage((prev) => prev + `\n🧾 Blockchain Tx: ${blockchainResult.txHash}`);
-      } else {
-        setMessage((prev) => prev + `\n⚠️ Blockchain Error: ${blockchainResult.error}`);
-      }
+      const response = await axios.post("http://localhost:5000/api/agreements/upload", formData);
+
+      setMessage(
+        `✅ Upload complete!\n🧾 Tx Hash: ${blockchainResult.txHash}\n📁 File ID: ${response.data.agreementId}`
+      );
 
     } catch (err) {
       console.error("Upload Error:", err);
-      setMessage("❌ Upload failed");
+      setMessage("❌ Upload failed. Check console.");
     }
   };
 

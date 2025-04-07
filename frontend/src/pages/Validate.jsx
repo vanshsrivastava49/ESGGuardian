@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import"./Validate.css";
+
 
 const Validate = () => {
   const [agreementId, setAgreementId] = useState("");

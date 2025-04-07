@@ -1,0 +1,30 @@
+.login-form {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form input {
+    border: 1px solid #d1d5db;
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+  
+  .login-form button {
+    background: #10b981;
+    color: white;
+    padding: 12px;
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+  }
+  
+  .login-form button:hover {
+    background: #059669;
+  }
+  

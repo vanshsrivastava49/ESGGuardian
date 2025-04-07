@@ -1,0 +1,25 @@
+.dashboard-table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  }
+  
+  .dashboard-table th {
+    background-color: #e2e8f0;
+    color: #1e293b;
+    font-weight: 600;
+    padding: 12px;
+  }
+  
+  .dashboard-table td {
+    padding: 12px;
+    border-top: 1px solid #e5e7eb;
+  }
+  
+  .dashboard-table tr:hover {
+    background-color: #f1f5f9;
+  }
+  

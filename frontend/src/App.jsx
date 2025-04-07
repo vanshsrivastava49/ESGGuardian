@@ -6,6 +6,7 @@ import Validate from "./pages/Validate";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import "./App.css";
 
 const App = () => {
   return (

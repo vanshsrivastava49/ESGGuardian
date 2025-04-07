@@ -1,37 +1,66 @@
 import React, { useState } from "react";
 import axios from "axios";
-import"./Validate.css";
-
+import "./Validate.css";
 
 const Validate = () => {
   const [agreementId, setAgreementId] = useState("");
   const [result, setResult] = useState(null);
+  const [message, setMessage] = useState("");
 
   const handleValidate = async () => {
+    setMessage("");
+    setResult(null);
+
+    if (!agreementId.trim()) {
+      setMessage("Please enter an Agreement ID.");
+      return;
+    }
+
     try {
-      const res = await axios.post("http://localhost:5000/api/agreements/validate", { agreementId });
+      const res = await axios.post("http://localhost:5000/api/agreements/validate", {
+        agreementId,
+      });
       setResult(res.data);
+      setMessage("✅ Validation successful");
     } catch (error) {
-      setResult({ message: "Validation failed" });
+      setMessage("❌ Validation failed");
+      setResult(null);
     }
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">Validate Agreement</h2>
+    <div className="validate-section">
+      <h2>Validate ESG Agreement</h2>
+
       <input
         type="text"
         value={agreementId}
         onChange={(e) => setAgreementId(e.target.value)}
         placeholder="Enter Agreement ID"
-        className="border p-2 rounded"
       />
-      <button onClick={handleValidate} className="ml-2 px-4 py-2 bg-green-500 text-white rounded">
-        Validate
-      </button>
+
+      <button onClick={handleValidate}>Validate</button>
+
+      {message && (
+        <p style={{ textAlign: "center", marginTop: "1rem", fontWeight: "500" }}>{message}</p>
+      )}
+
       {result && (
-        <div className="mt-4">
-          <p className="font-medium">Result: {result.message || "Validated"}</p>
+        <div
+          style={{
+            backgroundColor: "#fff",
+            padding: "1rem",
+            marginTop: "1.5rem",
+            borderRadius: "14px",
+            boxShadow: "0 8px 18px rgba(0,0,0,0.06)",
+          }}
+        >
+          <h4 style={{ color: "#2c7744", marginBottom: "1rem" }}>Agreement Details</h4>
+          <p><strong>Message:</strong> {result.message || "Validated"}</p>
+          {result.company && <p><strong>Company:</strong> {result.company}</p>}
+          {result.status && <p><strong>Status:</strong> {result.status}</p>}
+          {result.compliance && <p><strong>Compliance:</strong> {result.compliance}</p>}
+          {result.timestamp && <p><strong>Timestamp:</strong> {new Date(result.timestamp).toLocaleString()}</p>}
         </div>
       )}
     </div>

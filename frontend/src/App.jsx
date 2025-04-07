@@ -6,6 +6,7 @@ import Validate from "./pages/Validate";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Home from "./pages/Home";
 import "./App.css";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
       <Navbar />
       <Routes>
       <Route path="/" element={<Register />} />
+      <Route path="/home" element={<Home/>}/>
         <Route path="/upload" element={<Upload />} />
         <Route path="/validate" element={<Validate />} />
         <Route path="/dashboard" element={<Dashboard />} />

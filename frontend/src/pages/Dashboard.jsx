@@ -1,40 +1,57 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./Dashboard.css";
 
 const Dashboard = () => {
   const [agreements, setAgreements] = useState([]);
 
   useEffect(() => {
     const fetchAgreements = async () => {
-      const res = await axios.get("http://localhost:5000/api/agreements/all");
-      setAgreements(res.data);
+      try {
+        const res = await axios.get("http://localhost:5000/api/agreements/all");
+        setAgreements(res.data);
+      } catch (error) {
+        console.error("Error fetching agreements:", error);
+      }
     };
+
     fetchAgreements();
   }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-semibold mb-4">Uploaded Agreements</h2>
-      <table className="w-full border">
+    <div style={{ padding: "2rem" }}>
+      <h2 style={{ textAlign: "center", fontSize: "1.75rem", color: "#2c7744", marginBottom: "1rem" }}>
+        Uploaded ESG Agreements
+      </h2>
+
+      <table className="dashboard-table">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="border p-2">ID</th>
-            <th className="border p-2">Company</th>
-            <th className="border p-2">Validated</th>
-            <th className="border p-2">File Path</th>
-            <th className="border p-2">Blockchain Hash</th>
+          <tr>
+            <th>ID</th>
+            <th>Company</th>
+            <th>Validated</th>
+            <th>File Path</th>
+            <th>Blockchain Hash</th>
           </tr>
         </thead>
         <tbody>
-          {agreements.map((a) => (
-            <tr key={a._id}>
-              <td className="border p-2">{a._id}</td>
-              <td className="border p-2">{a.companyName}</td>
-              <td className="border p-2">{a.validated ? "Yes" : "No"}</td>
-              <td className="border p-2">{a.filePath}</td>
-              <td className="border p-2">{a.fileHash || "-"}</td>
+          {agreements.length > 0 ? (
+            agreements.map((a) => (
+              <tr key={a._id}>
+                <td>{a._id}</td>
+                <td>{a.companyName}</td>
+                <td>{a.validated ? "Yes" : "No"}</td>
+                <td>{a.filePath}</td>
+                <td>{a.fileHash || "-"}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="5" style={{ textAlign: "center", padding: "1rem", color: "#64748b" }}>
+                No agreements uploaded yet.
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>

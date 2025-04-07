@@ -1,29 +1,60 @@
+body{
+    margin:0 auto;
+    padding:0 auto;
+    font-family: "Outfit", sans-serif;
+    background: linear-gradient(135deg, #e9ffe2, #f3f8eb);
+}
 .validate-section {
-    background-color: #fefce8;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+    background: linear-gradient(135deg, #e9ffe2, #f3f8eb);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    max-width: 600px;
+    margin: 3rem auto;
+    transition: all 0.3s ease;
+  }
+  
+  .validate-section h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2c7744;
+    text-align: center;
+    margin-bottom: 1.5rem;
   }
   
   .validate-section input {
     width: 100%;
-    padding: 12px;
-    margin-bottom: 1rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
     border: 1px solid #e2e8f0;
-    border-radius: 12px;
+    border-radius: 14px;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+  }
+  
+  .validate-section input:focus {
+    border-color: #2c7744;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.2);
+    outline: none;
   }
   
   .validate-section button {
-    background: #f59e0b;
+    background: linear-gradient(90deg, #2c7744, #44a16f);
     color: white;
-    padding: 12px 20px;
+    padding: 0.85rem 1.5rem;
+    width: 100%;
     border: none;
-    border-radius: 12px;
+    border-radius: 14px;
+    font-size: 1rem;
     font-weight: 600;
-    transition: background 0.3s ease;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s ease;
   }
   
   .validate-section button:hover {
-    background: #d97706;
+    background: linear-gradient(90deg, #2c7744, #44a16f);
+
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 14px rgba(251, 191, 36, 0.2);
   }
   

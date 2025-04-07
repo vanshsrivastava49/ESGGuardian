@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import "../App.css";
 
 // Custom Axios instance pointing to your backend
 const api = axios.create({
@@ -33,32 +32,245 @@ const Login = () => {
   };
 
   return (
-    <div className="p-6 max-w-md mx-auto">
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
-      <form onSubmit={handleSubmit} className="space-y-3">
-        <input
-          name="email"
-          type="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          className="border w-full p-2 rounded"
-          required
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          className="border w-full p-2 rounded"
-          required
-        />
-        <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded">
-          Login
-        </button>
-      </form>
-      {message && <p className="mt-3 text-red-500">{message}</p>}
+    <div className="login-page">
+      <div className="login-container">
+        <div className="login-form">
+          <div className="logo">ESGGuardian</div>
+          <h1>Sign in to your account</h1>
+
+          <form onSubmit={handleSubmit}>
+            <div className="input-group">
+              <label htmlFor="email">Username or Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email"
+                placeholder="Enter your username or email"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <input 
+                type="password" 
+                id="password" 
+                name="password"
+                placeholder="Enter your password"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="forgot-password">
+              <a href="#">Forgot password?</a>
+            </div>
+
+            <button type="submit">Sign in</button>
+            
+            {message && <p className="message">{message}</p>}
+
+            <div className="divider">
+              <span>or</span>
+            </div>
+
+            <div className="signup-link">
+              New to ESGGuardian? <a href="/register">Create account</a>
+            </div>
+          </form>
+        </div>
+
+        <div className="login-image">
+          <div className="image-content">
+            <h2>Blockchain-Powered ESG Compliance</h2>
+            <p>Ensure real-time transparency and accountability in your Environmental, Social, and Governance commitments through immutable smart contracts.</p>
+            <p>Automated compliance monitoring powered by machine learning and decentralized verification.</p>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        .login-page {
+          font-family: "Outfit", sans-serif;
+  background: linear-gradient(135deg, #f0f0f0, #d6e4ff);
+          margin: 0px;
+          margin-top:-10px;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          color: #333;
+        }
+
+        .login-container {
+          position: relative;
+          display: flex;
+          width: 900px;
+          height: 600px;
+          background-color: white;
+          border-radius: 10px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+        }
+
+        /* Background image with low opacity */
+        .login-container::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('https://plus.unsplash.com/premium_photo-1681400678259-255b10890b08?q=80&w=2079&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+          background-size: cover;
+          background-position: center;
+          opacity: 0.20; /* Adjust for visibility */
+          z-index: 0;
+        }
+
+        .login-form,
+        .login-image {
+          position: relative;
+          z-index: 1;
+        }
+
+        .login-form {
+          flex: 1;
+          padding: 60px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+
+        .logo {
+          font-size: 28px;
+          font-weight: bold;
+          margin-bottom: 10px;
+          margin-top: 30px;
+          margin-left: 80px;
+          color: #2c7744;
+        }
+
+        h1 {
+          margin-bottom: 30px;
+          font-size: 24px;
+        }
+
+        .input-group {
+          margin-bottom: 20px;
+        }
+
+        label {
+          display: block;
+          margin-bottom: 8px;
+          font-weight: 500;
+        }
+
+        input {
+          width: 100%;
+          padding: 12px 15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          font-size: 16px;
+        }
+
+        .forgot-password {
+          text-align: right;
+          margin-bottom: 25px;
+        }
+
+        .forgot-password a {
+          color: #000000;
+          text-decoration: none;
+          font-size: 16px;
+        }
+
+        button {
+          width: 100%;
+          padding: 14px;
+          background-color: #2c7744;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          font-size: 16px;
+          font-weight: 500;
+          cursor: pointer;
+          margin-bottom: 20px;
+        }
+
+        .divider {
+          text-align: center;
+          margin: 10px 0;
+          position: relative;
+        }
+
+        .divider::before {
+          content: "";
+          position: absolute;
+          top: 20%;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background-color: #ddd;
+          z-index: 1;
+        }
+
+        .divider span {
+          background-color: #ddd;
+          padding: 0 10px;
+          position: relative;
+          z-index: 2;
+          font-weight: 500px;
+          color: #020202;
+        }
+
+        .signup-link {
+          text-align: center;
+          margin-top: 10px;
+          font-size: 16px;
+        }
+
+        .signup-link a {
+          color: #1c5b30;
+          text-decoration: none;
+          font-weight: 500;
+        }
+
+        .login-image {
+          flex: 1;
+          background: linear-gradient(135deg, #2c7744, #5a9367);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          padding: 40px;
+        }
+
+        .image-content h2 {
+          font-size: 24px;
+          margin-bottom: 30px;
+          text-align: center;
+        }
+
+        .image-content p {
+          font-size: 16px;
+          line-height: 1.6;
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
+        .message {
+          text-align: center;
+          color: #2c7744;
+          font-weight: 500;
+          margin-bottom: 15px;
+        }
+      `}</style>
     </div>
   );
 };

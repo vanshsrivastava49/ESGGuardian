@@ -1,45 +1,73 @@
+body{
+    margin:0 auto;
+    padding:0 auto;
+    font-family: "Outfit", sans-serif;
+    background: linear-gradient(135deg, #f0f9ff, #e0fee7);
+}
 .upload-container {
-    max-width: 600px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: #f0f4ff;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 620px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: linear-gradient(135deg, #f0f9ff, #e0fee7);
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease-in-out;
   }
   
   .upload-heading {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2c7744;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
   }
   
   .upload-input,
   .upload-file {
     display: block;
     width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+    outline: none;
+  }
+  
+  .upload-input:focus,
+  .upload-file:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
   }
   
   .upload-button {
-    padding: 0.75rem 1.5rem;
-    background-color: #2563eb;
+    width: 100%;
+    padding: 0.9rem;
+    background: #2c7744;;
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
+    letter-spacing: 0.5px;
   }
   
   .upload-button:hover {
-    background-color: #1d4ed8;
+    background: #2c7744;;
+    transform: translateY(-1.5px);
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
   }
   
   .upload-message {
-    margin-top: 1rem;
-    white-space: pre-line;
+    margin-top: 1.5rem;
     color: #1e3a8a;
+    text-align: center;
+    font-weight: 500;
+    white-space: pre-line;
+    font-size: 0.95rem;
   }
   

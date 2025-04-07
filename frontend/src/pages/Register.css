@@ -1,56 +1,72 @@
+body{
+    margin:0 auto;
+    padding:0 auto;
+    font-family: "Outfit", sans-serif;
+  background: linear-gradient(135deg, #f0f0f0, #d6e4ff);
+}
 .register-container {
-  max-width: 450px;
-  margin: 4rem auto;
-  background-color: #ffffff;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-}
-
-.register-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 1.5rem;
-}
-
-.register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.register-input {
-  padding: 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 12px;
-  transition: border 0.3s ease;
-}
-
-.register-input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-}
-
-.register-button {
-  background-color: #3b82f6;
-  color: white;
-  font-weight: 600;
-  padding: 12px;
-  border: none;
-  border-radius: 12px;
-  transition: background 0.3s ease;
-  cursor: pointer;
-}
-
-.register-button:hover {
-  background-color: #2563eb;
-}
-
-.register-message {
-  margin-top: 1rem;
-  text-align: center;
-  color: #ef4444;
-  font-weight: 500;
-}
+    width: 460px;
+    margin: 4rem auto;
+    background: linear-gradient(135deg, #f0f9ff, #e0fee7);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .register-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c7744;
+    margin-bottom: 1.75rem;
+    letter-spacing: 0.5px;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  .register-input {
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+  
+  .register-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+  }
+  
+  .register-button {
+    background: linear-gradient(90deg, #10b981, #059669);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+  }
+  
+  .register-button:hover {
+    background: linear-gradient(90deg, #10b981, #059669);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+  }
+  
+  .register-message {
+    margin-top: 1.25rem;
+    text-align: center;
+    color: #ef4444;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  

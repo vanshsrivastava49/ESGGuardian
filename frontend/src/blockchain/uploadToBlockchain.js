@@ -1,6 +1,4 @@
 import { ethers } from "ethers";
-
-// ABI must match deployed contract
 const contractABI = [
   "function uploadAgreement(string _fileHash, string _companyName) public",
   "function getAgreement(string _fileHash) public view returns (string, string, bool, address, uint256)"

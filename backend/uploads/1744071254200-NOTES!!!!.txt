@@ -1,0 +1,90 @@
+Hyperparameters control various aspects of model training, such as learning rate, batch size, and model architecture, which significantly impact the model's ability to generate coherent and contextually relevant text. Here's an overview of the topic:
+Hyperparameter optimization is essential for LLMs due to their computational intensity and the vast number of parameters involved.
+
+Key Hyperparameters in LLMs
+Learning Rate: Controls how quickly the model learns from the data. A high learning rate can lead to faster convergence but may cause oscillations, while a low rate ensures stability but might slow down training.
+
+Batch Size: Influences the stability and speed of training. Larger batches can provide more stable updates but require more memory and computational resources.
+
+Model Size and Architecture: Determines the model's capacity to capture complex patterns in language. Larger models generally perform better but are more resource-intensive.
+
+Challenges and Considerations
+Computational Cost: Training large models is expensive, making exhaustive hyperparameter tuning impractical.
+
+Exploration vs. Exploitation: Balancing the exploration of new hyperparameter combinations with exploiting known good configurations is crucial for efficient optimization.
+
+Model Interpretability: Understanding how different hyperparameters affect model performance can guide optimization efforts.
+
+Multi-Objective Optimization for Hyperparameters
+The final step focuses on optimizing hyperparameters using multi-objective algorithms to balance factors such as cost, latency, accuracy, and energy consumption.
+
+Techniques like Bayesian optimization are employed to explore the hyperparameter space efficiently. These methods use acquisition functions to identify Pareto-optimal configurations that satisfy multiple objectives simultaneously.
+
+Specific hyperparameters tuned include input/output configurations, SVD truncation thresholds, and bond dimensions of tensorized layers. For example, adjusting bond dimensions controls the degree of compression while maintaining accuracy.
+
+
+Paper summary:- (Language modelling using tensor trains)
+
+So talking about the llm models that can be made using TTD approach which helps in the reduce the high dimensional tensors by dividing them and making a chain like sequence of small tensors which ultimately reduces a lot of space and parameters.
+And in this model we have two main variants that is TTLM-Large and TTLM-Tiny, which is used to represent words and sentences in high-dimensional space. This approach captures complex word relationships, leading to improved performance.
+
+
+take any paper that has GitHub codes.. having tensorization approach
+then optimization...
+eyescaler or neurips.. 
+SVD approach can be used which is less lossy and has better compression
+Looking for quantum tensorized approach
+look for research papers where LLM are made using tensorization techniques..
+you can use available codes..
+
+find a paper having tensorization approach and follow that.
+next meeting come up with a code on which we will use to make the model (tensorized preferably)
+DMRG algorithms can be looked
+also optimization of hyperparameters
+LLAMA-7B
+
+**04/04/25**
+
+In SVD, the models are compressed by reducing the dimensionality of matrices involved in the model, the matrix A is divided into UEV, 
+and then there are k singular values which define the importance of each weight and then those values are only taken, which all in all 
+compresses the model. Singular values indicate how much each dimension contributes to the overall structure of the data. Larger singular values correspond to more significant dimensions.
+
+Out of SVD, LORA, and Loretta,.. SVD are beneficial when used for dimensional reduction or noise removal. But for fine tuning LORA and Loretta is better as in SVD there can be info loss due to removing smaller singular values.
+SVD is computationally efficient but might not offer the same level of parameter reduction as LoRA or LoRETTA.
+LORA is good for both efficiency and performance but needs more parameter compared to Loretta.
+In LoRA the original matrix is untouched, instead two small matrices are multiplied and fine tuned to reduce computational and memory overhead.
+LoRetta on the other hand can reduce more parameters as it uses TTD
+The number of trainable parameters in LoRA is proportional to the rank of the update matrices and the size of the original weight matrices.
+Each tensor factor contributes fewer parameters than the low-rank matrices used in LoRA.
+LoRETTA can achieve up to 100 times fewer trainable parameters than LoRA.
+Tensors basically are storage blocks(weights) for data.
+When we decompose a large tensor into small ones, each tensor then needs less parameters to function and the sum is always less than the number of parameters needed for that large tensor.
+
+Suppose a large tensor is of size 1000 x 1000 x 1000 had total parameter = 1,000,000,000. decomposing it into three can look like 100 x 100, 100 x 10, and 10 x 1000, now the parameters are 10000+1000+10000=21000.
+
+An MPS represents a high-dimensional tensor as a sequence of low-dimensional tensors (matrices) connected in a chain-like structure
+MPO is an extension of MPS for representing operators rather than states. It decomposes a large operator into a product of smaller matrices, each acting on a local site.
+
+Notes:- 
+
+Finalize the algorithm asap!
+and start the implementation.
+Literature papers, architecture diagram asap!!
+GitHub repo on mail and app..
+
+Title:- CompactifAI: Extreme Compression of Large Language Models using Quantum-Inspired Tensor Networks
+Journal Name:- arXiv
+Year of Publication:- 2024
+Author:- Andrei Tomut,1, 2 Saeed S. Jahromi,3, 1 Abhijoy Sarkar,1 Uygar Kurt,1 Sukhbinder
+Singh,4 Faysal Ishtiaq,1 C´esar Mu˜noz,1 Prabdeep Singh Bajaj,1 Ali Elborady,1 Gianni
+del Bimbo,1 Mehrazin Alizadeh,4 David Montero,1 Pablo Mart´ın-Ramiro,1 Muhammad
+Ibrahim,1 Oussama Tahiri Alaoui,1 John Malcolm,4 Samuel Mugel,4 and Rom´an Or´us1, 3, 5,
+
+Methodology:- It introduces a compression technique using Tensor Networks and decomposes the weight matrices into Tensor Networks, mainly Matrix Product Operators(MPOs). The decomposition is achieved through SVD in which the retraining the largest singular values to remove less relevant correlation.
+To reduce the loss in accuracy, it includes a retraining phase called "healing". 
+
+Insights:- The authors demonstrate that they can remove a large portion (up to 70%) of the parameters from LlaMA-2 7B with only a small drop in accuracy (2-3%)
+Tensor Networks not only reduce the size of LLMs but also speed up training and inference.
+
+Title:- Tensor Networks Meet Neural Networks: A Survey and Future Perspectives
+Methodology:- 

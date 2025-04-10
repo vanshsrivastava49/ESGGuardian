@@ -1,4 +1,4 @@
-Model training completed on 2025-04-08 01:10:07.962768
+Model training completed on 2025-04-08 05:51:16.576254
 Dataset: esg_agreements.csv, 3 records
 Features: 6
 Class distribution: {'None': 1, 'Governance': 1, 'Environmental': 1}

@@ -123,9 +123,8 @@ def train_regression_model(X_vec, y, vectorizer):
         
         # Evaluate model
         y_pred_score = reg_model.predict(X_test)
-        rmse = mean_squared_error(y_test, y_pred_score, squared=False)
+        rmse = np.sqrt(mean_squared_error(y_test, y_pred_score))
         r2 = r2_score(y_test, y_pred_score)
-        
         logger.info(f"ESG Score Model - RMSE: {rmse:.2f}, R²: {r2:.2f}")
         
         # Cross-validation

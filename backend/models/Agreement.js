@@ -1,26 +1,15 @@
 const mongoose = require("mongoose");
 
-const agreementSchema = new mongoose.Schema({
-  companyName: {
-    type: String,
-    required: true,
+const ESGAgreementSchema = new mongoose.Schema(
+  {
+    companyName: String,
+    validated: Boolean,
+    filePath: String,
+    fileHash: String,
+    esgScore: Number,
+    violatedNorms: [String],
   },
-  filePath: {
-    type: String,
-    required: true,
-  },
-  validated: {
-    type: Boolean,
-    default: false,
-  },
-  fileHash: {
-    type: String,
-    required: false,
-  },
-  uploadedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
+  { timestamps: true }
+);
 
-module.exports = mongoose.model("Agreement", agreementSchema);
+module.exports = mongoose.model("ESGAgreement", ESGAgreementSchema);

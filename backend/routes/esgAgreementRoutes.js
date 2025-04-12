@@ -8,62 +8,47 @@ const FormData = require("form-data");
 const ESGAgreement = require("../models/ESGAgreement");
 
 const uploadDir = path.join(__dirname, "..", "uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir);
-}
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) =>
-    cb(null, `${Date.now()}-${file.originalname}`),
+  filename: (req, file, cb) => cb(null, `${Date.now()}-${file.originalname}`),
 });
 const upload = multer({ storage });
 
+// Upload route
 router.post("/upload", upload.single("agreement"), async (req, res) => {
   try {
-    if (!req.file) return res.status(400).json({ message: "No file uploaded" });
-
     const { companyName, fileHash } = req.body;
-
-    if (!companyName || !fileHash) {
-      return res.status(400).json({ message: "Missing company name or file hash" });
-    }
-
     const newAgreement = new ESGAgreement({
       companyName,
       validated: false,
       filePath: `/uploads/${req.file.filename}`,
       fileHash,
     });
-
     const saved = await newAgreement.save();
-
     res.status(200).json({
-      message: "✅ File saved to server & metadata stored in MongoDB.",
+      message: "✅ File saved and metadata stored.",
       agreementId: saved._id,
       agreement: saved,
     });
   } catch (err) {
     console.error("Upload error:", err.message);
-    res.status(500).json({ message: "❌ Upload failed", error: err.message });
+    res.status(500).json({ message: "Upload failed", error: err.message });
   }
 });
 
-router.get("/all", async (req, res) => {
-  try {
-    const agreements = await ESGAgreement.find().sort({ createdAt: -1 });
-    res.json(agreements);
-  } catch (err) {
-    res.status(500).json({ message: "❌ Failed to fetch agreements", error: err.message });
-  }
-});
+// Validate with ML model
+router.post("/validate-ml", async (req, res) => {
+  const { agreementId } = req.body;
 
-router.post("/validate", upload.single("agreement"), async (req, res) => {
   try {
-    if (!req.file) return res.status(400).json({ message: "No file uploaded for validation" });
+    const agreement = await ESGAgreement.findById(agreementId);
+    if (!agreement) return res.status(404).json({ message: "Agreement not found" });
 
     const formData = new FormData();
-    formData.append("file", fs.createReadStream(req.file.path));
+    const absolutePath = path.join(__dirname, "..", agreement.filePath);
+    formData.append("file", fs.createReadStream(absolutePath));
 
     const response = await axios.post("http://localhost:5001/predict-esg", formData, {
       headers: formData.getHeaders(),
@@ -71,14 +56,18 @@ router.post("/validate", upload.single("agreement"), async (req, res) => {
 
     const { esg_score, violated_norms } = response.data;
 
+    agreement.validated = true;
+    agreement.esgScore = esg_score;
+    agreement.violatedNorms = violated_norms;
+    await agreement.save();
+
     res.status(200).json({
-      message: "✅ Validation complete",
-      esgScore: esg_score,
-      violatedNorms: violated_norms,
+      message: "✅ Agreement validated using ML",
+      agreement,
     });
   } catch (err) {
-    console.error("Validation failed:", err.message);
-    res.status(500).json({ message: "❌ Validation failed", error: err.message });
+    console.error("ML Validation failed:", err.message);
+    res.status(500).json({ message: "Validation failed", error: err.message });
   }
 });
 
